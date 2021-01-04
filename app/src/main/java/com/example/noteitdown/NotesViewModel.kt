@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
-class NotesViewModel(application: Application): AndroidViewModel(application) {
+class NotesViewModel(notesDataBaseDao:NotesDao,application: Application): AndroidViewModel(application) {
     val allNotes:LiveData<List<NotesEntity>>
     val job = Job()
     val uiScope = CoroutineScope(job+Dispatchers.Main)

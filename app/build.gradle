@@ -31,9 +31,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-//    buildFeatures{
-//        dataBinding true
-//    }
+    buildFeatures{
+        dataBinding true
+        viewBinding true
+    }
 //    viewBinding{
 //        enabled true
 //    }
@@ -50,10 +51,18 @@ dependencies {
     // Dependencies for working with Architecture components
     // You'll probably have to update the version numbers in build.gradle (Project)
 
+    implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
+
     // Room components
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 

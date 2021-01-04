@@ -10,16 +10,11 @@ import androidx.lifecycle.get
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val binding = DataBindingUtil.inflate<Ma>()
+        val notesDao = NotesDatabase.getDatabase(this).notesDao()
+        val viewModelFactory = NotesViewModelFactory(notesDao,application)
         val viewModel = ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NotesViewModel::class.java)
+           viewModelFactory).get(NotesViewModel::class.java)
         setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.fab).setOnClickListener(){
-
-        }
-        viewModel.allNotes.observe(this, Observer {
-
-        })
 
     }
 }
