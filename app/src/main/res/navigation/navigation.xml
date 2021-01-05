@@ -3,22 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/notesDisplayFragment"
+    app:startDestination="@id/notesDisplayFragment"
     tools:ignore="UnusedNavigation">
 
-    <fragment
-        android:id="@+id/witeDownFragment"
 
-        android:name="com.example.noteitdown.witeDownFragment"
-        android:label="wite_down_fragment"
-        tools:layout="@layout/wite_down_fragment" />
     <fragment
         android:id="@+id/notesDisplayFragment"
         android:name="com.example.noteitdown.NotesDisplayFragment"
         android:label="fragment_notes_display"
-        tools:layout="@layout/fragment_notes_display" >
-        <action
-            android:id="@+id/action_notesDisplayFragment_to_witeDownFragment"
-            app:destination="@id/witeDownFragment" />
+        tools:layout="@layout/fragment_notes_display">
+
     </fragment>
 </navigation>
