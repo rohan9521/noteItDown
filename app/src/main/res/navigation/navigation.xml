@@ -13,5 +13,18 @@
         android:label="fragment_notes_display"
         tools:layout="@layout/fragment_notes_display">
 
+        <action
+            android:id="@+id/action_notesDisplayFragment_to_writeNotesFragment"
+            app:destination="@id/writeNotesFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeNotesFragment"
+        android:name="com.example.noteitdown.WriteNotesFragment"
+        android:label="fragment_write_notes"
+        tools:layout="@layout/fragment_write_notes" >
+        <argument
+            android:name="notesId"
+            app:argType="integer" />
     </fragment>
 </navigation>

@@ -6,6 +6,9 @@ import androidx.room.*
 @Dao
 interface NotesDao {
 
+    @Query("Select * from notes_table where id=:key")
+    fun getNote(key:Int):LiveData<NotesEntity>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(note:NotesEntity)
 

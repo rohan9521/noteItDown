@@ -1,15 +1,16 @@
 package com.example.noteitdown
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
-class NotesRepository(private  val notesDao:NotesDao) {
+class NotesRepository(public val notesDao:NotesDao) {
 
-    val allNotes:LiveData<List<NotesEntity>>  = notesDao.fetAllNotes()
+    val allNotes: LiveData<List<NotesEntity>> = notesDao.fetAllNotes()
 
-    suspend fun insert(note:NotesEntity){
+    fun insert(note:NotesEntity){
         notesDao.insert(note)
     }
-    suspend fun delete(note: NotesEntity){
+    fun delete(note: NotesEntity){
         notesDao.delete(note)
     }
 
