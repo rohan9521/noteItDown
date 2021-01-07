@@ -30,12 +30,13 @@ class NotesADapter(private val notesDisplayFragment: NotesDisplayFragment):Recyc
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder.noteTitle.text = notes[position].text
+        holder.noteTitle.text = notes[position].title
     }
 }
 
 class NoteViewHolder(item: View):RecyclerView.ViewHolder(item){
     val noteTitle = item.findViewById<TextView>(R.id.textView)
     val imgDelete:ImageView = item.findViewById<ImageView>(R.id.imageView)
+
 
 }

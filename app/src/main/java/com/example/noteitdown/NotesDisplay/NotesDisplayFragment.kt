@@ -41,7 +41,7 @@ class NotesDisplayFragment : Fragment() {
         })
 
         binding.addActionButton.setOnClickListener(){
-            val notes = NotesEntity("this is a test string")
+            val notes = NotesEntity("Untitled","untitled")
             notesDisplayViewModel.insertNotes(notes)
 
         }
