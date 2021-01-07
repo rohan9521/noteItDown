@@ -19,6 +19,9 @@ class NotesADapter(private val notesDisplayFragment: NotesDisplayFragment):Recyc
         notesViewHolder.noteTitle.setOnClickListener(){
             notesDisplayFragment.navigateToNotesFragment(notes[notesViewHolder.adapterPosition].id)
         }
+        notesViewHolder.imgDelete.setOnClickListener(){
+            notesDisplayFragment.notesDisplayViewModel.deleteNotes(notes[notesViewHolder.adapterPosition])
+        }
         return  notesViewHolder
     }
 

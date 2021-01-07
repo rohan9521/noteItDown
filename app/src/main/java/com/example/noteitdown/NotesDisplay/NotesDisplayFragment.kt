@@ -13,7 +13,7 @@ import com.example.noteitdown.NotesDisplay.NotesADapter
 import com.example.noteitdown.databinding.FragmentNotesDisplayBinding
 
 class NotesDisplayFragment : Fragment() {
-
+     lateinit  var  notesDisplayViewModel :NotesViewModel
 
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ class NotesDisplayFragment : Fragment() {
         val notesDao =  NotesDatabase.getDatabase(application).notesDao()
         val notesRepository = NotesRepository(notesDao)
         val notesDisplayViewModelFactory =   NotesViewModelFactory(notesRepository.notesDao,application = application)
-        val notesDisplayViewModel = ViewModelProviders.of(this,notesDisplayViewModelFactory).get(NotesViewModel::class.java)
+         notesDisplayViewModel = ViewModelProviders.of(this,notesDisplayViewModelFactory).get(NotesViewModel::class.java)
         val adapter = NotesADapter(this)
         adapter.notes = listOf<NotesEntity>()
         binding.recyclerViewNotesDisplay.adapter = adapter
@@ -47,6 +47,7 @@ class NotesDisplayFragment : Fragment() {
         }
         return binding.root
     }
+
 
     fun navigateToNotesFragment(notesId:Int){
         var action = NotesDisplayFragmentDirections.actionNotesDisplayFragmentToWriteNotesFragment(notesId)

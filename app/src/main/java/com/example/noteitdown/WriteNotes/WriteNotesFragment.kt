@@ -31,13 +31,19 @@ class WriteNotesFragment : Fragment() {
         val notesRepository = NotesRepository(notesDatabaseDao)
         val viewModelFactory = WriteNotesViewModelFactory( notesRepository.notesDao,id,application)
         val writeNotesViewModel = ViewModelProviders.of(this,viewModelFactory).get(WriteNotesViewModel::class.java)
-        writeNotesViewModel.notesData.observe(viewLifecycleOwner, Observer {
+
+        writeNotesViewModel._notesData.observe(viewLifecycleOwner, Observer {
             notesData ->
             run {
+                binding.writeText.setText("")
                 binding.writeText.text.append(notesData.text)
             }
-
         })
+
+        binding.actionButtonSave.setOnClickListener(){
+            writeNotesViewModel.updateNote(binding.writeText.text.toString())
+        }
+
         return binding.root
     }
 

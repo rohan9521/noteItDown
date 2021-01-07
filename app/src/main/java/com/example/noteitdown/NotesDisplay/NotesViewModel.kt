@@ -6,22 +6,32 @@ import kotlinx.coroutines.*
 
 class NotesViewModel(notesDataBaseDao:NotesDao,application: Application): AndroidViewModel(application) {
 
-    val allNotes :LiveData<List<NotesEntity>>
+    lateinit var allNotes :LiveData<List<NotesEntity>>
 
     val repository = NotesRepository(notesDataBaseDao)
     val job = Job()
     val uiScope = CoroutineScope(job+Dispatchers.Main)
     init {
-        allNotes = repository.notesDao.fetAllNotes()
+        fetchAllNotes()
+    }
+
+    fun fetchAllNotes()=viewModelScope.launch (Dispatchers.IO){
+        allNotes = repository.fetchAll()
+    }
+
+
+    fun insertNotes(notes: NotesEntity)=viewModelScope.launch(Dispatchers.IO) {
+            repository.notesDao.insert(notes)
+    }
+
+    fun deleteAll()=viewModelScope.launch (Dispatchers.IO){
+        repository.deleteAll()
     }
 
     fun deleteNotes(notes: NotesEntity)=viewModelScope.launch(Dispatchers.IO) {
         repository.notesDao.delete(notes)
     }
 
-    fun insertNotes(notes: NotesEntity)=viewModelScope.launch(Dispatchers.IO) {
-            repository.notesDao.insert(notes)
-    }
 
     override fun onCleared() {
         super.onCleared()
