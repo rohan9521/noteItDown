@@ -14,7 +14,6 @@ class WriteNotesViewModel(notesDatabaseDao: NotesDao, notesId:Int, application:A
 
     init {
             _notesData= repository.getNote(notesId)
-
     }
 
     fun getNote(notesId: Int) {
@@ -25,7 +24,8 @@ class WriteNotesViewModel(notesDatabaseDao: NotesDao, notesId:Int, application:A
         }
     }
 
-    fun updateNote(text:String)=viewModelScope.launch(Dispatchers.IO) {
+    fun updateNote(text:String,title:String=_notesData.value?.title.toString())=viewModelScope.launch(Dispatchers.IO) {
+        _notesData.value?.let{it.title=title}
         _notesData.value?.let{it.text = text }
         _notesData.value?.let { repository.updateNote(it) }
     }

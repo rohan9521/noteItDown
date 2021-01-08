@@ -15,8 +15,11 @@ class NotesRepository(public val notesDao:NotesDao) {
     suspend fun fetchAll():LiveData<List<NotesEntity>>{
         return notesDao.fetAllNotes()
     }
-    fun  getNote(noteId:Int):LiveData<NotesEntity>{
+     fun getNote(noteId:Int):LiveData<NotesEntity>{
         return notesDao.getNote(noteId)
+    }
+    suspend fun getLast():NotesEntity{
+        return notesDao.getLast()
     }
 
 //Update
@@ -31,6 +34,7 @@ class NotesRepository(public val notesDao:NotesDao) {
     suspend  fun delete(note: NotesEntity){
         notesDao.delete(note)
     }
+
 
 
 }

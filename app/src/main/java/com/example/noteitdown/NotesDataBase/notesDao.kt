@@ -23,4 +23,7 @@ interface NotesDao {
 
     @Query("Delete from notes_table")
     fun deleteAll()
+
+    @Query("Select * from notes_table order by id DESC LIMIT 1")
+    fun getLast():NotesEntity
 }

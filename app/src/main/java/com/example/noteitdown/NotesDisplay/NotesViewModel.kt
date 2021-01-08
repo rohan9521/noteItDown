@@ -9,14 +9,19 @@ class NotesViewModel(notesDataBaseDao:NotesDao,application: Application): Androi
     lateinit var allNotes :LiveData<List<NotesEntity>>
 
     val repository = NotesRepository(notesDataBaseDao)
-    val job = Job()
-    val uiScope = CoroutineScope(job+Dispatchers.Main)
+
+    var lastNotesEntity:Int = -1
+
     init {
         fetchAllNotes()
     }
 
     fun fetchAllNotes()=viewModelScope.launch (Dispatchers.IO){
         allNotes = repository.fetchAll()
+    }
+
+    fun getLastNoteAdded()=viewModelScope.launch(Dispatchers.IO) {
+        lastNotesEntity=repository.getLast().id
     }
 
 
@@ -32,10 +37,17 @@ class NotesViewModel(notesDataBaseDao:NotesDao,application: Application): Androi
         repository.notesDao.delete(notes)
     }
 
+    fun updateNote(notes: NotesEntity)=viewModelScope.launch (Dispatchers.IO){
+        repository.updateNote(note = notes)
+    }
+
+
+
+
 
     override fun onCleared() {
         super.onCleared()
-        job.cancel()
+
     }
     
 }

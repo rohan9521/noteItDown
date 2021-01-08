@@ -37,11 +37,15 @@ class WriteNotesFragment : Fragment() {
             run {
                 binding.writeText.setText("")
                 binding.writeText.text.append(notesData.text)
+
+                binding.writeTitle.setText("")
+                binding.writeTitle.setText(notesData.title)
+
             }
         })
 
         binding.actionButtonSave.setOnClickListener(){
-            writeNotesViewModel.updateNote(binding.writeText.text.toString())
+            writeNotesViewModel.updateNote(binding.writeText.text.toString(),binding.writeTitle.text.toString())
         }
 
         return binding.root
@@ -49,6 +53,5 @@ class WriteNotesFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Toast.makeText(context,"destroyed",Toast.LENGTH_SHORT).show()
     }
 }
